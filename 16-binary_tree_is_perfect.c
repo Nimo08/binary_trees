@@ -1,6 +1,5 @@
 #include "binary_trees.h"
-#include <stdlib.h>
-size_t binary_tree_depth(const binary_tree_t *tree);
+size_t binary_tree_height(const binary_tree_t *tree);
 /**
  * binary_tree_is_perfect - checks if a binary tree is perfect
  * @tree: pointer to the root node of the tree to check
@@ -8,42 +7,45 @@ size_t binary_tree_depth(const binary_tree_t *tree);
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int left_depth, right_depth;
+	int left_height, right_height;
 
 	if (tree == NULL)
 	{
 		return (0);
 	}
-	left_depth = binary_tree_depth(tree->left);
-	right_depth = binary_tree_depth(tree->right);
-	if (left_depth == right_depth)
+	left_height = binary_tree_height(tree->left);
+	right_height = binary_tree_height(tree->right);
+	if (left_height == right_height)
 	{
-		return (1);
+		if (tree->left == NULL && tree->right == NULL)
+		{
+			return (1);
+		}
+		return (binary_tree_is_perfect(tree->left) &&
+				binary_tree_is_perfect(tree->right));
 	}
 	return (0);
 }
 /**
- * binary_tree_depth - measures the depth of a node in a binary tree
- * @tree: pointer to the node to measure the depth
- * Return: If tree is NULL, your function must return 0
+ * binary_tree_height - a function that measures the height of a binary tree
+ * @tree: a pointer to the root node of the tree to measure the height
+ * Return: The height of the binary tree, otherwise 0
  */
-size_t binary_tree_depth(const binary_tree_t *tree)
+size_t binary_tree_height(const binary_tree_t *tree)
 {
-	size_t left_depth, right_depth, max;
+	size_t height = 0;
 
 	if (tree == NULL)
-	{
 		return (0);
-	}
-	left_depth = binary_tree_depth(tree->left);
-	right_depth = binary_tree_depth(tree->right);
-	if (left_depth > right_depth)
+	while (tree->left)
 	{
-		max = left_depth;
+		height++;
+		tree = tree->left;
 	}
-	else
+	while (tree->right)
 	{
-		max = right_depth;
+		height++;
+		tree = tree->right;
 	}
-	return (max + 1);
+	return (height);
 }
