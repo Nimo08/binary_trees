@@ -5,8 +5,8 @@
 /**
  * binary_tree_inorder - a function that goes through a binary tree using
  * in-order traversal
- * @tree - a pointer to the root node of the tree to traverse
- * @func -  is a pointer to a function to call for each node
+ * @tree: a pointer to the root node of the tree to traverse
+ * @func: is a pointer to a function to call for each node
  * Return: Nothing
  */
 
