@@ -28,7 +28,7 @@ bst_t *bst_insert(bst_t **tree, int value)
 		*tree = newnode;
 		return (newnode);
 	}
-	if (value < (*tree)->n)
+	if (value <= (*tree)->n)
 	{
 		if ((*tree)->left == NULL)
 		{
